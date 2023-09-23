@@ -1,6 +1,7 @@
 const express = require("express");
 const eventRouter = express.Router();
 const { Events } = require("../models");
+const { validateToken } = require("./auth");
 
 console.log({ Events });
 //get request when requestion data
@@ -10,13 +11,28 @@ eventRouter.get("/", async (req, res) => {
   //return all events in json format
   res.json(listOfEvents);
 });
+//update request
+eventRouter.put("/:id", async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const updatedEventData = req.body;
+    const event = await Events.findByPk(eventId);
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+    await event.update(updatedEventData);
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while updating the event" });
+  }
+});
 //delete request
 eventRouter.delete("/:id", async (req, res) => {
   try {
     const eventId = req.params.id;
-    // Perform the event deletion logic here, using the eventId
-    // For example, you can use Sequelize to delete the event from the database.
-    // Replace this with your actual deletion logic.
+
     await Events.destroy({
       where: { id: eventId },
     });
