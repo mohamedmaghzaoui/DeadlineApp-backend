@@ -1,5 +1,6 @@
 //backend code
 const express = require("express");
+require("dotenv").config();
 const app = express();
 const cors = require("cors"); //used to connect between frontend and backend for localhost
 app.use(express.json());

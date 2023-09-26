@@ -1,7 +1,9 @@
+
+
 {
   "development": {
     "username": "root",
-    "password": "ANct123/",
+    "password":   "yourPassword",
     "database": "deadlineapp",
     "host": "127.0.0.1",
     "dialect": "mysql"
