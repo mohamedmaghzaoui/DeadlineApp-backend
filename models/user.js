@@ -1,3 +1,4 @@
+//create user table using sequelize
 module.exports = (sequelize, datatypes) => {
   const Users = sequelize.define("Users", {
     name: {
@@ -7,7 +8,7 @@ module.exports = (sequelize, datatypes) => {
     email: {
       type: datatypes.STRING,
       allowNull: false,
-      unique: true, // Add the unique constraint
+      unique: true, // unique email for each user
     },
     hashedPassword: {
       type: datatypes.TEXT,

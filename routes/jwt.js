@@ -1,4 +1,7 @@
+//create token when user is logged in
 const { sign } = require("jsonwebtoken");
+require("dotenv").config();
+const tokenPassword = process.env.TOKEN_PASSWORD;
 const createToken = (user) => {
   const token = sign(
     {
@@ -6,7 +9,7 @@ const createToken = (user) => {
       role: user.role,
       id: user.id,
     },
-    "8280secret"
+    tokenPassword
   );
   return token;
 };

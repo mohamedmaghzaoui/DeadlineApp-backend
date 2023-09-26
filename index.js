@@ -1,12 +1,12 @@
+//backend code
 const express = require("express");
 const app = express();
-const cors = require("cors");
+const cors = require("cors"); //used to connect between frontend and backend for localhost
 app.use(express.json());
 app.use(cors());
 //Routers
 const eventRouters = require("./routes/event");
 const usersRouters = require("./routes/user");
-
 app.use("/events", eventRouters);
 app.use("/users", usersRouters);
 
