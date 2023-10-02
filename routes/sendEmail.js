@@ -11,15 +11,15 @@ const sendMail = (message) => {
     port: 587, // Port
 
     auth: {
-      user: "mohamedmaghzaoui53@gmail.com", // Your email address
+      user: "yourEmail", // Your email address
       pass: password, // Your email password or an application-specific password
     },
   });
 
   // Define email content and options
   const mailOptions = {
-    from: "mohamedmaghzaoui53@gmail.com",
-    to: ["medalin53@gmail.com", "mohamedmaghzaoui53@gmail.com"],
+    from: "yourEmail",
+    to: ["email1", "email2"],
     subject: "notification de calendrier",
     html: `<p>:${message}</p><a href="http://localhost:3000/">clicker ici pour acceder l'application</a>`,
   };
