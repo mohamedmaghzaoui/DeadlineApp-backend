@@ -6,13 +6,24 @@ const Sequelize = require("sequelize");
 const process = require("process");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+require('dotenv').config();  // Load environment variables
+
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+if (process.env.DATABASE_URL) {
+  // If DATABASE_URL is set in the .env file, use it
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'mysql',
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false, // To accept self-signed SSL certificates
+      },
+    },
+  });
 } else {
+  const config = require(__dirname + "/../config/config.json")[env];
+  // Fallback to config.json if DATABASE_URL is not present
   sequelize = new Sequelize(
     config.database,
     config.username,
@@ -48,3 +59,4 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
